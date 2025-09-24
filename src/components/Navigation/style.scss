@@ -1,0 +1,27 @@
+.navBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.312rem 1.25rem;
+  &__logo {
+    width: 200px;
+    height: 54.38px;
+  }
+  &__signIn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    text-decoration: none;
+    margin-right: 0.5rem;
+    &--icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  &__signIn:hover {
+    text-decoration: underline;
+  }
+}
