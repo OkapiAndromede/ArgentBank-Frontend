@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Feature from "../components/Feature";
 import HeroBanner from "../components/HeroBanner";
 import Navigation from "../components/Navigation";
+import Footer from "../components/Footer";
 
 function Home() {
   const [features, setFeatures] = useState([]);
@@ -29,6 +30,7 @@ function Home() {
           />
         ))}
       </section>
+      <Footer />
     </>
   );
 }
