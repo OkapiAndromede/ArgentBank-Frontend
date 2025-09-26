@@ -1,3 +1,7 @@
+// #root {
+//   display: flex;
+//   flex-direction: column;
+// }
 html {
   font-family: "Roboto", sans-serif;
   text-align: center;
@@ -12,4 +16,17 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  @media (min-width: 920px) {
+    flex-direction: row;
+  }
+}
+.mainSignIn {
+  flex: 1;
+  background-color: #12002b;
+  padding: 20px 0;
 }
