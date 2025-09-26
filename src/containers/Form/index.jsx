@@ -1,3 +1,4 @@
+import Button from "../../components/Button";
 import Field from "../../components/Field";
 import "./style.scss";
 function Form() {
@@ -38,7 +39,7 @@ function Form() {
           />
           <label htmlFor="remember-me">Remember me</label>
         </div>
-        {/* Mettre le bouton de connexion */}
+        <Button>Sign In</Button>
       </form>
     </section>
   );
