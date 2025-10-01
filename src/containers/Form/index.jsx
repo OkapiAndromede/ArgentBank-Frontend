@@ -39,7 +39,7 @@ function Form() {
           />
           <label htmlFor="remember-me">Remember me</label>
         </div>
-        <Button>Sign In</Button>
+        <Button buttonType="submit">Sign In</Button>
       </form>
     </section>
   );
