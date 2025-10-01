@@ -1,3 +1,4 @@
+import Button from "../Button";
 import "./style.scss";
 function UserBanner() {
   return (
@@ -5,7 +6,9 @@ function UserBanner() {
       <h1>
         Welcome back <br /> Tony Jarvis !
       </h1>
-      <button className="editButton">Edit Name</button>
+      <Button buttonStyle="editButton" buttonType="default">
+        Edit Name
+      </Button>
     </div>
   );
 }
