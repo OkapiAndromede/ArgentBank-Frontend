@@ -24,4 +24,28 @@
   &__signIn:hover {
     text-decoration: underline;
   }
+  &__signOut {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-right: 0.5rem;
+
+    &--icon {
+      width: 20px;
+      height: 20px;
+    }
+    &--link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: inherit;
+    }
+    &--text:hover {
+      text-decoration: underline;
+    }
+  }
 }
