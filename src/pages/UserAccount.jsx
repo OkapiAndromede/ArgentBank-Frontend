@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 function UserAccount() {
   return (
     <>
-      <Navigation />
+      <Navigation isConnected={true} userName={"Tony"} />
       <main className="mainUser">
         <UserBanner />
         <section className="account">
