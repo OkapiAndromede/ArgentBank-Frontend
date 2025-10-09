@@ -2,7 +2,16 @@ import Button from "../../components/Button";
 import Field from "../../components/Field";
 import "./style.scss";
 import useLoginForm from "../../hooks/useLoginForm";
-
+/**
+ * Composant Form affichant un formulaire de connexion utilisateur
+ *
+ * Ce composant utilise le hook personnalisé {@link useLoginForm} pour gérer :
+ * - Les états internes du formulaire ("email", "password")
+ * - La fonction handleSubmit pour la soumission du formulaire
+ * @component
+ *
+ * @returns {JSX.Element} composant Form rendu.
+ */
 function Form() {
   const { email, password, setEmail, setPassword, handleSubmit } =
     useLoginForm();
