@@ -1,7 +1,35 @@
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../../components/Button";
 import Field from "../../components/Field";
 import "./style.scss";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { logIn } from "../../features/auth/authThunks";
 function Form() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  let [email, setEmail] = useState("");
+  let [password, setPassword] = useState("");
+
+  const { status, isAuthenticated, error } = useSelector((state) => state.auth);
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    try {
+      const resultAction = await dispatch(logIn({ email, password }));
+      if (logIn.fulfilled.match(resultAction)) {
+        //Connexion réussie
+        navigate("/userAccount");
+      } else {
+        //Connexion echoué
+        console.log("Erreur de connexion :", resultAction.payload);
+      }
+    } catch (err) {
+      console.error("Erreur inattendue:", err);
+    }
+  }
   return (
     <section className="signIn">
       <svg
@@ -12,13 +40,15 @@ function Form() {
         <path d="M463 448.2C440.9 409.8 399.4 384 352 384L288 384C240.6 384 199.1 409.8 177 448.2C212.2 487.4 263.2 512 320 512C376.8 512 427.8 487.3 463 448.2zM64 320C64 178.6 178.6 64 320 64C461.4 64 576 178.6 576 320C576 461.4 461.4 576 320 576C178.6 576 64 461.4 64 320zM320 336C359.8 336 392 303.8 392 264C392 224.2 359.8 192 320 192C280.2 192 248 224.2 248 264C248 303.8 280.2 336 320 336z" />
       </svg>
       <h1>Sign In</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="inputWrapper">
           <label htmlFor="username">Username</label>
           <Field
             inputType="text"
             inputId="username"
-            inputName="Username"
+            inputName="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
             isRequired={true}
           />
         </div>
@@ -28,6 +58,8 @@ function Form() {
             inputType="password"
             inputId="password"
             inputName="password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
             isRequired={true}
           />
         </div>
