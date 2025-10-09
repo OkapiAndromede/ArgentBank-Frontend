@@ -2,7 +2,21 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logIn } from "../features/auth/authThunks";
-
+/**
+ * Hook personalisé gérant la logique du formulaire de connexion
+ *
+ * Le hook assure les tâches suivantes :
+ * 1. La gestion des états internes du formulaire ("email", "password")
+ * 2. La soumission du formulaire et la gestion du flux de connexion via Redux
+ *
+ * @function
+ * @returns {object} Un objet contenant :
+ * @returns {string} return.email - L'adresse mail saisie par l'utilisateur
+ * @returns {string} return.password - Le mot de passe saisi par l'utilisateur
+ * @returns {Function} return.setEmail - Le mutateur de "email"
+ * @returns {Function} return.setPassword - Le mutateur de "password"
+ * @returns {Function} return.handleSubmit - Gère la soumission du formulaire et la redirection après connexion
+ */
 export default function useLoginForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
