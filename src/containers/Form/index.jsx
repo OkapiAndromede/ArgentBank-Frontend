@@ -1,35 +1,11 @@
-import { useDispatch, useSelector } from "react-redux";
 import Button from "../../components/Button";
 import Field from "../../components/Field";
 import "./style.scss";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { logIn } from "../../features/auth/authThunks";
+import useLoginForm from "../../hooks/useLoginForm";
+
 function Form() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  let [email, setEmail] = useState("");
-  let [password, setPassword] = useState("");
-
-  const { status, isAuthenticated, error } = useSelector((state) => state.auth);
-
-  async function handleSubmit(event) {
-    event.preventDefault();
-
-    try {
-      const resultAction = await dispatch(logIn({ email, password }));
-      if (logIn.fulfilled.match(resultAction)) {
-        //Connexion réussie
-        navigate("/userAccount");
-      } else {
-        //Connexion echoué
-        console.log("Erreur de connexion :", resultAction.payload);
-      }
-    } catch (err) {
-      console.error("Erreur inattendue:", err);
-    }
-  }
+  const { email, password, setEmail, setPassword, handleSubmit } =
+    useLoginForm();
   return (
     <section className="signIn">
       <svg
