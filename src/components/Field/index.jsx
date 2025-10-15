@@ -5,8 +5,8 @@
  * @param {string} inputId - L'identifiant unique de l'input
  * @param {string} inputName - le nom de l'input
  * @param {boolean} [isRequired = fasle]  - Détermine si le champ est requis
- * @param {string} value - la valeur actuelle du champ
- * @param {Function} onChange - fonction appellée lors d'une modification du champ
+ * @param {object} register - Objet register de React hook form
+ * @param {string} error - Message d'erreur éventuel
  *
  * @returns {JSX.Element} composant Field rendu
  */
@@ -16,8 +16,8 @@ function Field({
   inputId,
   inputName,
   isRequired = false,
-  value,
-  onChange,
+  register,
+  error,
 }) {
   return (
     <>
@@ -25,10 +25,9 @@ function Field({
         type={inputType}
         id={inputId}
         name={inputName}
-        value={value}
-        onChange={onChange}
-        {...(isRequired ? { required: true } : {})}
+        {...register(inputName, { require: isRequired })}
       />
+      {error && <span>{error}</span>}
     </>
   );
 }
