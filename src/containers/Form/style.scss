@@ -15,6 +15,19 @@
   margin: 0 auto;
   margin-top: 3rem;
   padding: 2rem;
+  position: relative;
+  &__icon {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+  }
+  &__content {
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
 }
 .inputWrapper {
   display: flex;
