@@ -25,7 +25,7 @@ function Field({
         type={inputType}
         id={inputId}
         name={inputName}
-        {...register(inputName, { require: isRequired })}
+        {...register(inputName, { required: isRequired })}
       />
       {error && <span>{error}</span>}
     </>
