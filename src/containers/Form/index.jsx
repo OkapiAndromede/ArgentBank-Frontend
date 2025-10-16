@@ -36,6 +36,7 @@ function Form() {
       <div className="errorContainer">
         <svg
           onClick={() => dispatch(resetStatus())}
+          className="errorContainer__icon"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 640 640"
         >
