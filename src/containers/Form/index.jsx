@@ -34,32 +34,35 @@ function Form() {
       <form onSubmit={handleSubmit(handleLoginSubmit)}>
         <div className="inputWrapper">
           <label htmlFor="username">Username</label>
-          <Field
-            inputType="text"
-            inputId="username"
-            inputName="email"
-            isRequired={true}
-            register={register}
-            error={errors.email && "Email requis"}
+          <input
+            type="text"
+            id="username"
+            {...register("email", {
+              required: "L'email est requis",
+              pattern: {
+                value: /^[A-Za-z0-9._-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/i,
+                message: "Adresse email invalide",
+              },
+            })}
           />
+          {errors.email && <span>{errors.email.message}</span>}
         </div>
         <div className="inputWrapper">
           <label htmlFor="password">Password</label>
-          <Field
-            inputType="password"
-            inputId="password"
-            inputName="password"
-            isRequired={true}
-            register={register}
-            error={errors.password && "Mot de passe requis"}
+          <input
+            type="password"
+            id="password"
+            {...register("password", {
+              required: "Le mot de passe est requis",
+            })}
           />
+          {errors.password && <span>{errors.password.message}</span>}
         </div>
         <div className="inputRemember">
-          <Field
-            inputType="checkbox"
-            inputId="remember-me"
-            inputName="remember-me"
-            register={register}
+          <input
+            type="checkbox"
+            id="remember-me"
+            {...register("remember-me")}
           />
           <label htmlFor="remember-me">Remember me</label>
         </div>
