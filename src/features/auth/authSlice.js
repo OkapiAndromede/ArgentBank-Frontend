@@ -17,6 +17,7 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       state.status = "idle";
       state.error = null;
+      localStorage.clear();
     },
     resetStatus: (state) => {
       state.status = "idle";
