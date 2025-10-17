@@ -3,9 +3,13 @@ import Feature from "../components/Feature";
 import HeroBanner from "../components/HeroBanner";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
+import { useDispatch } from "react-redux";
+import { logIn } from "../features/auth/authThunks";
+import { toast } from "react-toastify";
 
 function Home() {
   const [features, setFeatures] = useState([]);
+  const dispatch = useDispatch();
   useEffect(() => {
     async function fetchData() {
       const response = await fetch("/features.json");
@@ -14,6 +18,15 @@ function Home() {
     }
     fetchData();
   }, []);
+  useEffect(() => {
+    const email = localStorage.getItem("email");
+    const password = localStorage.getItem("password");
+    if (email && password) {
+      dispatch(logIn({ email, password }));
+      console.log(email);
+      toast.success("token présent");
+    }
+  }, [dispatch]);
 
   return (
     <>
