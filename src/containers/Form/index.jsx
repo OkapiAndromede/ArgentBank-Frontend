@@ -32,8 +32,6 @@ function Form() {
       reset();
     }, 1000);
   }
-  console.log("refresh");
-
   useEffect(() => {
     if (status === "failed") {
       toast.error("Mail ou mot de passe inccorect");
@@ -78,11 +76,7 @@ function Form() {
           {errors.password && <span>{errors.password.message}</span>}
         </div>
         <div className="inputRemember">
-          <input
-            type="checkbox"
-            id="remember-me"
-            {...register("remember-me")}
-          />
+          <input type="checkbox" id="remember-me" {...register("rememberMe")} />
           <label htmlFor="remember-me">Remember me</label>
         </div>
         <Button buttonType="submit">Sign In</Button>
