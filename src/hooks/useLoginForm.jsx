@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logIn } from "../features/auth/authThunks";
+import { rememberUser } from "../features/auth/authSlice";
 /**
  * Hook personalisé gérant la logique du formulaire de connexion
  *
@@ -29,6 +30,7 @@ export default function useLoginForm() {
         case logIn.fulfilled.match(resultAction) && rememberMe:
           localStorage.setItem("email", email);
           localStorage.setItem("password", password);
+          dispatch(rememberUser());
           navigate("/userAccount");
           break;
         default:
