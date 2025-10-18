@@ -5,7 +5,6 @@ import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 import { useDispatch } from "react-redux";
 import { logIn } from "../features/auth/authThunks";
-import { toast } from "react-toastify";
 
 function Home() {
   const [features, setFeatures] = useState([]);
@@ -23,8 +22,6 @@ function Home() {
     const password = localStorage.getItem("password");
     if (email && password) {
       dispatch(logIn({ email, password }));
-      console.log(email);
-      toast.success("token présent");
     }
   }, [dispatch]);
 
