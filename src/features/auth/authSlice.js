@@ -4,6 +4,7 @@ import { logIn } from "./authThunks";
 const initialState = {
   token: null,
   isAuthenticated: false,
+  isRemember: false,
   status: "idle",
   error: null,
 };
@@ -15,6 +16,7 @@ const authSlice = createSlice({
     logOut: (state) => {
       state.token = null;
       state.isAuthenticated = false;
+      state.isRemember = false;
       state.status = "idle";
       state.error = null;
       localStorage.clear();
@@ -22,6 +24,9 @@ const authSlice = createSlice({
     resetStatus: (state) => {
       state.status = "idle";
       state.error = null;
+    },
+    rememberUser: (state) => {
+      state.isRemember = true;
     },
   },
   extraReducers: (builder) => {
@@ -41,5 +46,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { logOut, resetStatus } = authSlice.actions;
+export const { logOut, resetStatus, rememberUser } = authSlice.actions;
 export default authSlice.reducer;
