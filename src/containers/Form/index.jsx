@@ -3,7 +3,6 @@ import "./style.scss";
 import useLoginForm from "../../hooks/useLoginForm";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { resetStatus } from "../../features/auth/authSlice";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 /**
@@ -20,7 +19,6 @@ function Form() {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm();
   const { status } = useSelector((state) => state.auth);
@@ -28,9 +26,6 @@ function Form() {
 
   function onSubmit(data) {
     handleLoginSubmit(data);
-    setTimeout(() => {
-      reset();
-    }, 1000);
   }
   useEffect(() => {
     if (status === "failed") {
