@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import Button from "../Button";
 import { useSelector } from "react-redux";
+import "./style.scss";
 
 function EditNameModal({ onClose }) {
   const defaultFirstName = useSelector((state) => state.user.firstName);
@@ -32,7 +33,7 @@ function EditNameModal({ onClose }) {
             })}
           />
         </div>
-        <div className="inputWrapper">
+        <div className="editingInput">
           <label htmlFor="firstName">First name :</label>
           <input
             type="text"
@@ -41,13 +42,19 @@ function EditNameModal({ onClose }) {
             disabled
           />
         </div>
-        <div className="inputWrapper">
+        <div className="editingInput">
           <label htmlFor="lastName">Last name :</label>
           <input type="text" id="lastName" {...register("lastName")} disabled />
         </div>
         <div className="buttonChoice">
-          <Button buttonType="submit">Save</Button>
-          <Button buttonType="default" onClick={onClose}>
+          <Button buttonType="submit" buttonStyle={"modalButton saveStyle"}>
+            Save
+          </Button>
+          <Button
+            buttonType="default"
+            onClick={onClose}
+            buttonStyle={"modalButton cancelStyle"}
+          >
             Cancel
           </Button>
         </div>
