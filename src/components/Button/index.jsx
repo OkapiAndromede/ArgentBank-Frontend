@@ -20,7 +20,7 @@ function Button({
     case BUTTON_TYPES.SUBMIT:
       return (
         <input
-          className="button"
+          className={buttonStyle || "button"}
           type="submit"
           value={children}
           {...(isDisabled && { disabled: true })}
