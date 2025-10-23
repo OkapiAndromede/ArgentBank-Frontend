@@ -1,0 +1,46 @@
+.userModal {
+  background-color: white;
+  padding: 20px;
+  margin: 0 auto 16px auto;
+  width: 35%;
+
+  .editingInput {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    gap: 5px;
+    padding: 5px;
+    label {
+      font-weight: 700;
+    }
+    input {
+      padding: 5px;
+      font-size: 1.2rem;
+      border-radius: 5px;
+    }
+  }
+  .buttonChoice {
+    display: flex;
+    gap: 5px;
+    .modalButton {
+      width: 50%;
+      margin-top: 1rem;
+      padding: 4px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 5px;
+      border: none;
+      color: #fff;
+    }
+    .modalButton:hover {
+      cursor: pointer;
+    }
+  }
+  .cancelStyle {
+    background-color: red;
+  }
+  .saveStyle {
+    background-color: #00bc77;
+  }
+}
