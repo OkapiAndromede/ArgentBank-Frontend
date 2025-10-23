@@ -3,10 +3,12 @@ import Button from "../components/Button";
 import Navigation from "../components/Navigation";
 import UserBanner from "../components/UserBanner";
 import Footer from "../components/Footer";
+import { useSelector } from "react-redux";
 function UserAccount() {
+  const userName = useSelector((state) => state.user.userName);
   return (
     <>
-      <Navigation isConnected={true} userName={"Tony"} />
+      <Navigation isConnected={true} userName={userName} />
       <main className="mainUser">
         <UserBanner />
         <section className="account">
