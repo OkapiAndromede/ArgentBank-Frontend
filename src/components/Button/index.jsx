@@ -3,10 +3,20 @@ const BUTTON_TYPES = {
   DEFAULT: "default",
   SUBMIT: "submit",
 };
-function Button({ buttonType, children, isDisabled = false, buttonStyle }) {
+function Button({
+  buttonType,
+  children,
+  isDisabled = false,
+  buttonStyle,
+  onClick,
+}) {
   switch (buttonType) {
     case BUTTON_TYPES.DEFAULT:
-      return <button className={buttonStyle}> {children} </button>;
+      return (
+        <button onClick={onClick} className={buttonStyle} type="button">
+          {children}
+        </button>
+      );
     case BUTTON_TYPES.SUBMIT:
       return (
         <input
