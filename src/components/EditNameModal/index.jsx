@@ -24,11 +24,11 @@ function EditNameModal({ onClose }) {
       <h1 className="userModal__title">Edit user info</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="editingInput">
-          <label htmlFor="username">User name :</label>
+          <label htmlFor="userName">User name :</label>
           <input
             type="text"
-            id="username"
-            {...register("username", {
+            id="userName"
+            {...register("userName", {
               required: "Le nouveau nom d'utilisateur est requis",
             })}
           />
