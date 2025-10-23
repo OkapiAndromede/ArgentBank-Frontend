@@ -21,5 +21,25 @@
       "description": "Security Icon",
       "content": "We use top of the line encryption to make sure your data and money is always safe."
     }
+  ],
+  "funds": [
+    {
+      "id": 4,
+      "title": "Argent Bank Checking (x8349)",
+      "amount": 2082.79,
+      "description": "Available Balance"
+    },
+    {
+      "id": 5,
+      "title": "Argent Bank Savings (x6712)",
+      "amount": 10928.42,
+      "description": "Available Balance"
+    },
+    {
+      "id": 6,
+      "title": "Argent Bank Credit Card (x8349)",
+      "amount": 184.3,
+      "description": "Current Balance"
+    }
   ]
 }
