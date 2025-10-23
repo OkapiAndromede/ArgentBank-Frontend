@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import Button from "../Button";
 import { useSelector } from "react-redux";
 import "./style.scss";
+import useEditForm from "../../hooks/useEditForm";
 
 function EditNameModal({ onClose }) {
   const defaultFirstName = useSelector((state) => state.user.firstName);
@@ -16,7 +17,10 @@ function EditNameModal({ onClose }) {
       lastName: defaultLastName,
     },
   });
+  const { handleEditSubmit } = useEditForm();
+
   function onSubmit(data) {
+    handleEditSubmit(data);
     onClose();
   }
   return (
