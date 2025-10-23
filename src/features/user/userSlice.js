@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getUserData } from "./userThunks";
+import { getUserData, putUserData } from "./userThunks";
 
 const initialState = {
   firstName: "",
   lastName: "",
   userName: "",
-  status: "idle",
+  getStatus: "idle",
+  putStatus: "idle",
   error: null,
 };
 
@@ -17,23 +18,37 @@ const userSlice = createSlice({
       state.firstName = "";
       state.lastName = "";
       state.userName = "";
-      state.status = "idle";
+      state.getStatus = "idle";
+      state.putStatus = "idle";
       state.error = null;
     },
   },
   extraReducers: (builder) => {
     builder
+      //----- GET USER DATA -----
       .addCase(getUserData.pending, (state) => {
-        state.status = "loading";
+        state.getStatus = "loading";
       })
       .addCase(getUserData.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.getStatus = "succeeded";
         state.firstName = action.payload.body.firstName;
         state.lastName = action.payload.body.lastName;
         state.userName = action.payload.body.userName;
       })
       .addCase(getUserData.rejected, (state, action) => {
-        state.status = "failed";
+        state.getStatus = "failed";
+        state.error = action.payload;
+      })
+      //----- PUT USER DATA -----
+      .addCase(putUserData.pending, (state) => {
+        state.putStatus = "loading";
+      })
+      .addCase(putUserData.fulfilled, (state, action) => {
+        state.putStatus = "succeeded";
+        state.userName = action.payload.body.userName;
+      })
+      .addCase(putUserData.rejected, (state, action) => {
+        state.putStatus = "failed";
         state.error = action.payload;
       });
   },
