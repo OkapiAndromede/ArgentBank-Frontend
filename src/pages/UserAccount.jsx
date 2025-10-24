@@ -10,7 +10,9 @@ import { formatAmount } from "./utils";
 import { useNavigate } from "react-router-dom";
 import { connectUser } from "../features/auth/authSlice";
 function UserAccount() {
-  const userName = useSelector((state) => state.user.userName);
+  const reduxUserName = useSelector((state) => state.user.userName);
+  const localUserName = localStorage.getItem("userName");
+  const userName = reduxUserName || localUserName;
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
 
@@ -31,7 +33,8 @@ function UserAccount() {
   useEffect(() => {
     if (!localToken && !isAuthenticated) {
       return navigate("/signIn");
-    } else {
+    }
+    if (localToken) {
       dispatch(connectUser());
     }
   }, []);
@@ -42,7 +45,7 @@ function UserAccount() {
       <>
         <Navigation wantToConnect={false} userName={userName} />
         <main className="mainUser">
-          <UserBanner />
+          <UserBanner userName={userName} />
           {funds?.map((item) => (
             <section className="account" key={item.id}>
               <Account
