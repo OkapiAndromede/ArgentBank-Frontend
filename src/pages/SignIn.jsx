@@ -4,7 +4,7 @@ import Form from "../containers/Form";
 function SignIn() {
   return (
     <>
-      <Navigation />
+      <Navigation wantToConnect={true} />
       <main className="mainSignIn">
         <Form />
       </main>
