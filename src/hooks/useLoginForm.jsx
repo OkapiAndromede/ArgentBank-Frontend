@@ -1,7 +1,7 @@
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logIn } from "../features/auth/authThunks";
+import { getUserData } from "../features/user/userThunks";
 import { rememberUser } from "../features/auth/authSlice";
 /**
  * Hook personalisé gérant la logique du formulaire de connexion
@@ -21,22 +21,30 @@ export default function useLoginForm() {
 
     try {
       const resultAction = await dispatch(logIn({ email, password }));
-      switch (true) {
-        //Cas 1 : Connexion reussie
-        case logIn.fulfilled.match(resultAction) && !rememberMe:
-          navigate("/userAccount");
-          break;
-        //Cas 2 : Connexion reussie +rememberMe
-        case logIn.fulfilled.match(resultAction) && rememberMe:
-          localStorage.setItem("email", email);
-          localStorage.setItem("password", password);
-          dispatch(rememberUser());
-          navigate("/userAccount");
-          break;
-        default:
-          console.log("Erreur de connexion :", resultAction.payload);
-          break;
+      // Else OUT
+
+      //Cas 1 : Connexion reussie
+      if (logIn.fulfilled.match(resultAction) && !rememberMe) {
+        //Mise à jour du state user
+        dispatch(getUserData());
+        return navigate("/userAccount");
       }
+
+      //Cas 2 : Connexion reussie +rememberMe
+      if (logIn.fulfilled.match(resultAction) && rememberMe) {
+        //Persistance du token
+        const token = resultAction.payload.body.token;
+        localStorage.setItem("token", token);
+        //Activation de isRemember
+        dispatch(rememberUser());
+        //Mise à jour du state user et persistance du userName
+        const userDataAction = await dispatch(getUserData());
+        const userName = userDataAction.payload.body.userName;
+        localStorage.setItem("userName", userName);
+        return navigate("/userAccount");
+      }
+
+      console.log("Erreur de connexion :", resultAction.payload);
     } catch (err) {
       console.error("Erreur inattendue:", err);
     }
