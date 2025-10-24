@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { logIn } from "./authThunks";
+import { resetUser } from "../user/userSlice";
 
 const initialState = {
   token: null,
@@ -20,12 +21,17 @@ const authSlice = createSlice({
       state.status = "idle";
       state.error = null;
       localStorage.clear();
+      resetUser();
     },
     resetStatus: (state) => {
       state.status = "idle";
       state.error = null;
     },
     rememberUser: (state) => {
+      state.isRemember = true;
+    },
+    connectUser: (state) => {
+      state.isAuthenticated = true;
       state.isRemember = true;
     },
   },
@@ -46,5 +52,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { logOut, resetStatus, rememberUser } = authSlice.actions;
+export const { logOut, resetStatus, rememberUser, connectUser } =
+  authSlice.actions;
 export default authSlice.reducer;
