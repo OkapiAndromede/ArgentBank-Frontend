@@ -44,9 +44,8 @@ function UserAccount() {
         <main className="mainUser">
           <UserBanner />
           {funds?.map((item) => (
-            <section className="account">
+            <section className="account" key={item.id}>
               <Account
-                key={item.id}
                 title={item.title}
                 amount={`$${item.amount}`}
                 description={item.description}
