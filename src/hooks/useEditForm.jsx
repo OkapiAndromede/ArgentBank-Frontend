@@ -1,21 +1,30 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { putUserData } from "../features/user/userThunks";
 import { toast } from "react-toastify";
 
 export default function useEditForm() {
   const dispatch = useDispatch();
-
+  const isRemember = useSelector((state) => state.auth.isRemember);
   //Soumission du formulaire d'édition
   async function handleEditSubmit(formData) {
     const { userName } = formData;
 
     try {
       const resultAction = await dispatch(putUserData({ userName }));
-      if (putUserData.fulfilled.match(resultAction)) {
-        toast.success("User name changé avec succès");
-      } else {
-        console.log("Erreur de connexion : ", resultAction.payload);
+      //Cas 1 : Utilisateur sans remember
+      if (putUserData.fulfilled.match(resultAction) && !isRemember) {
+        //Message de succès de l'opération
+        return toast.success("User name changé avec succès");
       }
+      //Cas 2 : Utilisateur avec remember
+      if (putUserData.fulfilled.match(resultAction) && isRemember) {
+        //Stockage persistant de la nouvelle valeur
+        localStorage.removeItem("userName");
+        localStorage.setItem("userName", userName);
+        //Message de succès de l'opération
+        return toast.success("User name changé avec succès");
+      }
+      console.log("Erreur de connexion : ", resultAction.payload);
     } catch (err) {
       console.error("Erreur inattendue :", err);
     }
