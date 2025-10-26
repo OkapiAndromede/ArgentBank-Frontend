@@ -27,7 +27,7 @@ export default function useLoginForm() {
       if (logIn.fulfilled.match(resultAction) && !rememberMe) {
         //Mise à jour du state user
         dispatch(getUserData());
-        return navigate("/userAccount");
+        return navigate("/user-account");
       }
 
       //Cas 2 : Connexion reussie +rememberMe
@@ -44,7 +44,7 @@ export default function useLoginForm() {
         localStorage.setItem("lastName", lastName);
         localStorage.setItem("userName", userName);
         localStorage.setItem("isRemember", rememberMe);
-        return navigate("/userAccount");
+        return navigate("/user-account");
       }
 
       console.log("Erreur de connexion :", resultAction.payload);
