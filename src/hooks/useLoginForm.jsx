@@ -37,10 +37,13 @@ export default function useLoginForm() {
         localStorage.setItem("token", token);
         //Activation de isRemember
         dispatch(rememberUser());
-        //Mise à jour du state user et persistance du userName
+        //Mise à jour du state user et persistance des infos utilisateur
         const userDataAction = await dispatch(getUserData());
-        const userName = userDataAction.payload.body.userName;
+        const { firstName, lastName, userName } = userDataAction.payload.body;
+        localStorage.setItem("firstName", firstName);
+        localStorage.setItem("lastName", lastName);
         localStorage.setItem("userName", userName);
+        localStorage.setItem("isRemember", rememberMe);
         return navigate("/userAccount");
       }
 
