@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { logIn } from "./authThunks";
 import { resetUser } from "../user/userSlice";
+import { safeGetItem } from "../utils";
 
 const initialState = {
-  token: null,
+  token: safeGetItem("token"),
   isAuthenticated: false,
-  isRemember: false,
+  isRemember: safeGetItem("isRemember"),
   status: "idle",
   error: null,
 };
