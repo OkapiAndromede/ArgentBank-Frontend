@@ -3,6 +3,8 @@ import Button from "../Button";
 import { useSelector } from "react-redux";
 import "./style.scss";
 import useEditForm from "../../hooks/useEditForm";
+import { toast } from "react-toastify";
+import { useEffect } from "react";
 
 function EditNameModal({ onClose }) {
   const defaultFirstName = useSelector((state) => state.user.firstName);
@@ -10,7 +12,7 @@ function EditNameModal({ onClose }) {
   const {
     register,
     handleSubmit,
-    formState: { error },
+    formState: { errors },
   } = useForm({
     defaultValues: {
       firstName: defaultFirstName,
@@ -23,6 +25,12 @@ function EditNameModal({ onClose }) {
     handleEditSubmit(data);
     onClose();
   }
+
+  useEffect(() => {
+    if (errors.userName) {
+      toast.error(errors.userName.message);
+    }
+  }, [errors.userName]);
   return (
     <section className="userModal">
       <h1 className="userModal__title">Edit user info</h1>
@@ -34,6 +42,10 @@ function EditNameModal({ onClose }) {
             id="userName"
             {...register("userName", {
               required: "Le nouveau nom d'utilisateur est requis",
+              pattern: {
+                value: /^[A-Za-zÀ-ÖØ-öø-ÿ\-'\s]{2,30}$/i,
+                message: "New user Name are invalid",
+              },
             })}
           />
         </div>
