@@ -29,7 +29,7 @@ function Form() {
   }
   useEffect(() => {
     if (status === "failed") {
-      toast.error("Mail ou mot de passe inccorect");
+      toast.error("email or password are invalid");
     }
   }, [status]);
 
@@ -50,10 +50,10 @@ function Form() {
             type="text"
             id="username"
             {...register("email", {
-              required: "L'email est requis",
+              required: "You must provide a email",
               pattern: {
                 value: /^[A-Za-z0-9._-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/i,
-                message: "Adresse email invalide",
+                message: "Email are invalid",
               },
             })}
           />
@@ -65,7 +65,7 @@ function Form() {
             type="password"
             id="password"
             {...register("password", {
-              required: "Le mot de passe est requis",
+              required: "You must provide a password",
             })}
           />
           {errors.password && <span>{errors.password.message}</span>}
