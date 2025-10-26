@@ -14,7 +14,7 @@ export default function useEditForm() {
       //Cas 1 : Utilisateur sans remember
       if (putUserData.fulfilled.match(resultAction) && !isRemember) {
         //Message de succès de l'opération
-        return toast.success("User name changé avec succès");
+        return toast.success("Username updated successfully");
       }
       //Cas 2 : Utilisateur avec remember
       if (putUserData.fulfilled.match(resultAction) && isRemember) {
@@ -22,7 +22,7 @@ export default function useEditForm() {
         localStorage.removeItem("userName");
         localStorage.setItem("userName", userName);
         //Message de succès de l'opération
-        return toast.success("User name changé avec succès");
+        return toast.success("Username updated successfully");
       }
       console.log("Erreur de connexion : ", resultAction.payload);
     } catch (err) {
