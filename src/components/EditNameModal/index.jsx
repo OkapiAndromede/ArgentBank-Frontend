@@ -41,7 +41,7 @@ function EditNameModal({ onClose }) {
             type="text"
             id="userName"
             {...register("userName", {
-              required: "Le nouveau nom d'utilisateur est requis",
+              required: "You must provide a new username",
               pattern: {
                 value: /^[A-Za-zÀ-ÖØ-öø-ÿ\-'\s]{2,30}$/i,
                 message: "New user Name are invalid",
