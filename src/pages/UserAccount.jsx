@@ -10,9 +10,7 @@ import { formatAmount } from "./utils";
 import { useNavigate } from "react-router-dom";
 import { connectUser } from "../features/auth/authSlice";
 function UserAccount() {
-  const reduxUserName = useSelector((state) => state.user.userName);
-  const localUserName = localStorage.getItem("userName");
-  const userName = reduxUserName || localUserName;
+  const userName = useSelector((state) => state.user.userName);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
 
