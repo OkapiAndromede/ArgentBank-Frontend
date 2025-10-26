@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getUserData, putUserData } from "./userThunks";
+import { safeGetItem } from "../utils";
 
 const initialState = {
-  firstName: "",
-  lastName: "",
-  userName: "",
+  firstName: safeGetItem("firstName"),
+  lastName: safeGetItem("lastName"),
+  userName: safeGetItem("userName"),
   getStatus: "idle",
   putStatus: "idle",
   error: null,
