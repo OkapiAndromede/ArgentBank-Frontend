@@ -9,12 +9,16 @@ import axios from "axios";
 import { formatAmount } from "./utils";
 import { useNavigate } from "react-router-dom";
 import { connectUser } from "../features/auth/authSlice";
+import { logIn } from "../features/auth/authThunks";
 function UserAccount() {
   const userName = useSelector((state) => state.user.userName);
+  const userEmail = useSelector((state) => state.user.userEmail);
+  const userPassword = useSelector((state) => state.user.userPassword);
+  const rememberMe = useSelector((state) => state.auth.isRemember);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const localToken = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
 
-  const localToken = localStorage.getItem("token");
   const navigate = useNavigate();
   const [funds, setFunds] = useState([]);
 
@@ -29,16 +33,31 @@ function UserAccount() {
   }, []);
 
   useEffect(() => {
-    if (!localToken && !isAuthenticated) {
-      return navigate("/signIn");
-    }
-    if (localToken) {
-      dispatch(connectUser());
-    }
+    const autoLogIn = async () => {
+      if (!rememberMe || !userEmail || !userPassword) return;
+
+      try {
+        const resultAction = await dispatch(
+          logIn({ email: userEmail, password: userPassword })
+        );
+        if (logIn.fulfilled.match(resultAction)) {
+          dispatch(connectUser());
+        } else {
+          console.warn("connexion automatique échouée", resultAction);
+          return navigate("/signIn");
+        }
+      } catch (err) {
+        console.error("Erreur lors de la connexion automatique : ", err);
+      }
+    };
+    //On essaye d'abord de récupérer une connexion remember
+    autoLogIn();
+    //On vérifie a minima la présence du token
+    if (!localToken) return navigate("/signIn");
   }, []);
 
   //Renvoi l'utilisateur sur la page de connexion s'il n'est pas authentifié
-  if (isAuthenticated || localToken) {
+  if (isAuthenticated) {
     return (
       <>
         <Navigation wantToConnect={false} userName={userName} />
