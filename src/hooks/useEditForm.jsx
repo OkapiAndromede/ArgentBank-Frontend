@@ -20,8 +20,6 @@ export default function useEditForm() {
       //Cas 2 : Utilisateur avec remember
       if (putUserData.fulfilled.match(resultAction) && isRemember) {
         //Stockage persistant de la nouvelle valeur
-        // localStorage.removeItem("userName");
-        // localStorage.setItem("userName", userName);
         safeChangeItem("userName", userName);
         //Message de succès de l'opération
         return toast.success("Username updated successfully");
