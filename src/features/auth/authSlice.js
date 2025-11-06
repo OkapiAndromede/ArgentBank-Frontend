@@ -6,7 +6,7 @@ import { safeGetItem } from "../utils";
 const initialState = {
   token: safeGetItem("token"),
   isAuthenticated: false,
-  isRemember: safeGetItem("isRemember"),
+  isRemember: safeGetItem("rememberMe"),
   status: "idle",
   error: null,
 };
@@ -21,7 +21,9 @@ const authSlice = createSlice({
       state.isRemember = false;
       state.status = "idle";
       state.error = null;
+
       localStorage.clear();
+
       resetUser();
     },
     resetStatus: (state) => {
