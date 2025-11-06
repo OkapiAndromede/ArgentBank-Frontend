@@ -6,6 +6,8 @@ const initialState = {
   firstName: safeGetItem("firstName"),
   lastName: safeGetItem("lastName"),
   userName: safeGetItem("userName"),
+  userEmail: safeGetItem("email"),
+  userPassword: safeGetItem("password"),
   getStatus: "idle",
   putStatus: "idle",
   error: null,
@@ -19,6 +21,8 @@ const userSlice = createSlice({
       state.firstName = "";
       state.lastName = "";
       state.userName = "";
+      state.userEmail = "";
+      state.userPassword = "";
       state.getStatus = "idle";
       state.putStatus = "idle";
       state.error = null;
