@@ -34,16 +34,23 @@ export default function useLoginForm() {
       if (logIn.fulfilled.match(resultAction) && rememberMe) {
         //Persistance du token
         const token = resultAction.payload.body.token;
-        localStorage.setItem("token", token);
         //Activation de isRemember
         dispatch(rememberUser());
         //Mise à jour du state user et persistance des infos utilisateur
         const userDataAction = await dispatch(getUserData());
         const { firstName, lastName, userName } = userDataAction.payload.body;
-        localStorage.setItem("firstName", firstName);
-        localStorage.setItem("lastName", lastName);
-        localStorage.setItem("userName", userName);
-        localStorage.setItem("isRemember", rememberMe);
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            firstName,
+            lastName,
+            userName,
+            rememberMe,
+            token,
+            email,
+            password,
+          })
+        );
         return navigate("/user-account");
       }
 
