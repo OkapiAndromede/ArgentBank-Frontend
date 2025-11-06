@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { putUserData } from "../features/user/userThunks";
 import { toast } from "react-toastify";
+import { safeChangeItem } from "../features/utils";
 
 export default function useEditForm() {
   const dispatch = useDispatch();
@@ -19,8 +20,9 @@ export default function useEditForm() {
       //Cas 2 : Utilisateur avec remember
       if (putUserData.fulfilled.match(resultAction) && isRemember) {
         //Stockage persistant de la nouvelle valeur
-        localStorage.removeItem("userName");
-        localStorage.setItem("userName", userName);
+        // localStorage.removeItem("userName");
+        // localStorage.setItem("userName", userName);
+        safeChangeItem("userName", userName);
         //Message de succès de l'opération
         return toast.success("Username updated successfully");
       }
