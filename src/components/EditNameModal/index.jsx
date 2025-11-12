@@ -33,7 +33,7 @@ function EditNameModal({ onClose }) {
   }, [errors.userName]);
   return (
     <section className="userModal">
-      <h1 className="userModal__title">Edit user info</h1>
+      <h2 className="userModal__title">Edit user info</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="editingInput">
           <label htmlFor="userName">User name :</label>
