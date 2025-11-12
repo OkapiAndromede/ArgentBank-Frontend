@@ -63,6 +63,7 @@ function UserAccount() {
         <Navigation wantToConnect={false} userName={userName} />
         <main className="mainUser">
           <UserBanner userName={userName} />
+          <h2 className="srOnly">Accounts</h2>
           {funds?.map((item) => (
             <section className="account" key={item.id}>
               <Account
