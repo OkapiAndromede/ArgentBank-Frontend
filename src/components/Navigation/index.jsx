@@ -63,6 +63,7 @@ function Navigation({ wantToConnect, userName }) {
           src="../public/images/argentBankLogo.webp"
           alt="Argent Bank Logo"
         ></img>
+        <h1 className="srOnly">Argent Bank</h1>
       </NavLink>
       <div className={"navBar__user"}>
         <svg
