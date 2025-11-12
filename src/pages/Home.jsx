@@ -48,6 +48,7 @@ function Home() {
       <Navigation wantToConnect={true} />
       <HeroBanner />
       <section className="features">
+        <h2 className="srOnly">Features</h2>
         {features?.map((item) => (
           <Feature
             key={item.id}
