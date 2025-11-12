@@ -46,19 +46,21 @@ function Home() {
   return (
     <>
       <Navigation wantToConnect={true} />
-      <HeroBanner />
-      <section className="features">
-        <h2 className="srOnly">Features</h2>
-        {features?.map((item) => (
-          <Feature
-            key={item.id}
-            imageSrc={item.image}
-            imageAlt={item.description}
-            title={item.title}
-            text={item.content}
-          />
-        ))}
-      </section>
+      <main>
+        <HeroBanner />
+        <section className="features">
+          <h2 className="srOnly">Features</h2>
+          {features?.map((item) => (
+            <Feature
+              key={item.id}
+              imageSrc={item.image}
+              imageAlt={item.description}
+              title={item.title}
+              text={item.content}
+            />
+          ))}
+        </section>
+      </main>
       <Footer />
     </>
   );
