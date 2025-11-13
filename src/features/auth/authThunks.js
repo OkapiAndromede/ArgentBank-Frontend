@@ -3,7 +3,7 @@ import axios from "axios";
 /**
  * Thunk asynchrone gérant la connexion d'un utilisateur.
  *
- * Cette fonction envoie une requête HTTP `POST` au serveur d'authentification afin de valider les identifiants
+ * Cette fonction envoie une requête HTTP `POST` au serveur afin de valider les identifiants
  * de l'utilisateur. En cas de succès, elle retourne les données de réponse (incluant le token d'authentification).
  * En cas d'échec, elle renvoie une valeur de rejet contenant le message d'erreur approprié.
  *
