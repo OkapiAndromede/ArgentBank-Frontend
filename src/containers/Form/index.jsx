@@ -8,8 +8,11 @@ import { toast } from "react-toastify";
 /**
  * Composant Form affichant un formulaire de connexion utilisateur
  *
- * Ce composant gère la saisie et la validation des identifiants de connexion à l’aide de **React Hook Form**
- * et du hook personnalisé {@link useLoginForm}, qui encapsule la logique d’authentification.
+ * Ce composant gère la saisie et la validation des identifiants de connexion.
+ * Il utilise :
+ * - {@link useLoginForm} : un hook personalisé qui encapsule la logique d'authentification.
+ * - "useForm" (de la bibliothèque **react-hook-form**): pour la gestion des entrées et des validations du formulaire.
+ *
  * @component
  *
  * @returns {JSX.Element} composant Form rendu.
