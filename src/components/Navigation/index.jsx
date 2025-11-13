@@ -2,7 +2,17 @@ import { NavLink } from "react-router-dom";
 import "./style.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../features/auth/authSlice";
-
+/**
+ * Composant Navigation gérant l'affichage de la barre de navigation
+ *
+ * Il utilise :
+ * - {@function renderUserLink} : Une fonction interne permettant un affichage conditionnel des liens
+ * @component
+ * @param {boolean} wantToConnect - Indique si l'utilisateur cherche à se connecter
+ * @param {string} userName - Le nom d'utilisateur actuellement affiché dans la barre de navigation
+ *
+ * @returns {JSX.Element} composant Navigation rendu
+ */
 function Navigation({ wantToConnect, userName }) {
   const dispatch = useDispatch();
   const isRemember = useSelector((state) => state.auth.isRemember);
