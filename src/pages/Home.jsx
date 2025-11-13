@@ -7,6 +7,28 @@ import { useDispatch, useSelector } from "react-redux";
 import { connectUser } from "../features/auth/authSlice";
 import { logIn } from "../features/auth/authThunks";
 
+/**
+ * Composant principal de la page d'accueil
+ *
+ * En particulier, il assure :
+ * 1. Affichage de la barre de navigation, la bannière principale et la liste des qualités de l'entreprise.
+ * 2. Récupération dynamique des données des "qualités" depuis un fichier local `features.json`.
+ * 3. Gestion d'une connexion automatique de l'utilisateur si l'option "Remember Me" est active.
+ *
+ * ### Logique interne :
+ * - **Récupération des données :** via `fetch("/features.json")`, les qualités sont chargées au montage du composant.
+ * - **Connexion automatique :** si `rememberMe`, `userEmail` et `userPassword` sont présents dans le store Redux,
+ *   le composant tente de reconnecter automatiquement l’utilisateur en déclenchant le thunk `logIn`.
+ *   En cas de succès, l’action `connectUser` est dispatchée pour rétablir l’état d’authentification.
+ *
+ * ### Éléments Redux utilisés :
+ * - `user.userEmail` : email stocké localement.
+ * - `user.userPassword` : mot de passe stocké localement.
+ * - `auth.isRemember` : indicateur du mode “Remember Me”.
+ *
+ * @component
+ * @returns {JSX.Element} Composant Home rendu
+ */
 function Home() {
   const [features, setFeatures] = useState([]);
   const dispatch = useDispatch();
