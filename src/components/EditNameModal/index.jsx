@@ -5,7 +5,19 @@ import "./style.scss";
 import useEditForm from "../../hooks/useEditForm";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
-
+/**
+ * Composant EditNameModal gérant le formulaire de modification de nom d'utilisateur
+ *
+ * Ce composant affiche une modale permettant à l'utilisateur de modifier son "userName"
+ * Il utilise :
+ * - {@link useEditForm} : hook personnalisé qui gère la soumission et la mise à jour des données utilisateur
+ * - "useForm" (de la bibliothèque **react-hook-form**): pour la gestion des entrées et des validations du formulaire
+ *
+ * @component
+ * @param {Function} onClose - Fonction appelée lors de la fermeture de la modal
+ *
+ * @returns {JSX.Element} composant EditNameModal rendu
+ */
 function EditNameModal({ onClose }) {
   const defaultFirstName = useSelector((state) => state.user.firstName);
   const defaultLastName = useSelector((state) => state.user.lastName);
