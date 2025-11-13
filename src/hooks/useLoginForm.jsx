@@ -6,10 +6,28 @@ import { rememberUser } from "../features/auth/authSlice";
 /**
  * Hook personalisé gérant la logique du formulaire de connexion
  *
- * Le hook assure la logique d'authentification
+ * Ce hook orchestre tout le processus d'authentification :
+ * - Envoie les identifiants de connexion au serveur via le thunk {@link logIn}.
+ * - Récupère les données utilisateur via le thunk {@link getUserData} en cas de succès.
+ * - Gère la persistance des informations utilisateur si l'option "Remember Me" est activée.
+ * - Redirige l'utilisateur vers la page "/user-account" après une connexion réussie.
  *
- * @function
- * @returns {Function} return.handleLoginSubmit - Gère l'authentification et la redirection après connexion
+ * ### Comportements possibles :
+ * 1. **Connexion réussie sans "Remember Me"** : les données utilisateur sont chargées dans le store Redux.
+ * 2. **Connexion réussie avec "Remember Me"** : les données utilisateur et le token sont stockés dans `localStorage` ainsi que dans le store Redux.
+ * 3. **Échec de la connexion** : un message d’erreur est affiché dans la console.
+ *
+ * @function useLoginForm
+ *
+ * @returns {Object} Objet contenant la fonction handleLoginSubmit
+ * @returns {Function} return.handleLoginSubmit - Fonction gérant la soumission du formulaire de connexion.
+ * Elle prend en paramètre un objet contenant :
+ * @param {Object} formData - Données du formulaire de connexion.
+ * @param {string} formData.email - Adresse mail de l'utilisateur.
+ * @param {string} formData.password - Mot de passe de l'utilisateur.
+ * @param {boolean} formData.rememberMe - Indique si les données doivent être persistés dans le localStorage.
+ *
+ * @throws {Error} Erreur inattendue lors de la tentative de connexion ou de la récupération des données utilisateur.
  */
 export default function useLoginForm() {
   const dispatch = useDispatch();
@@ -60,7 +78,6 @@ export default function useLoginForm() {
     }
   }
 
-  //le hook expose uniquement ce dont le composant a besoin
   return {
     handleLoginSubmit,
   };
