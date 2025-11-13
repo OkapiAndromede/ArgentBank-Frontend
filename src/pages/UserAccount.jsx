@@ -10,6 +10,35 @@ import { formatAmount } from "./utils";
 import { useNavigate } from "react-router-dom";
 import { connectUser } from "../features/auth/authSlice";
 import { logIn } from "../features/auth/authThunks";
+/**
+ * Composant principale de la page user-account
+ *
+ * En particulier, il assure :
+ * 1. Affichage des informations de compte et les soldes financiers de l'utilisateur
+ * 2. Gestion de l'accès à la page
+ * 3. La reconnexion automatique de l'utilisateur si l'option "Remember Me" est active.
+ *
+ * ### Logique interne :
+ * - **Vérification d’authentification :**
+ *   Si l’utilisateur n’est pas connecté et qu’aucun token n’est présent,
+ *   il est redirigé vers la page de connexion (`/signIn`).
+ * - **Connexion automatique :**
+ *   Si l’option “Remember Me” est active, le composant tente de reconnecter
+ *   l’utilisateur automatiquement à partir de son email et de son mot de passe stockés.
+ * - **Récupération des comptes :**
+ *   Les données des comptes (`funds`) sont chargées depuis un fichier local (`/features.json`),
+ *   puis formatées via la fonction utilitaire `formatAmount()` avant affichage.
+ *
+ * ### Données Redux utilisées :
+ * - `user.userName` : nom d’utilisateur affiché.
+ * - `user.userEmail`, `user.userPassword` : informations nécessaires à la reconnexion automatique.
+ * - `auth.isRemember` : état du mode “Remember Me”.
+ * - `auth.isAuthenticated` : indique si l’utilisateur est connecté.
+ * - `auth.token` : token JWT de session.
+ *
+ * @returns {JSX.Element|null} Le contenu de la page `UserAccount` si l’utilisateur est authentifié,
+ * sinon redirige vers la page de connexion.
+ */
 function UserAccount() {
   const userName = useSelector((state) => state.user.userName);
   const userEmail = useSelector((state) => state.user.userEmail);
