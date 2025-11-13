@@ -1,7 +1,40 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getUserData, putUserData } from "./userThunks";
 import { safeGetItem } from "../utils";
-
+/**
+ * Slice Redux gérant l'état de l'utilisateur
+ *
+ * Cette slice centralise la logique liée à l'obtention des données utilisateur, leur persistance et leur modification.
+ *
+ * ### Structure du state:
+ * - "firstName" *(string)* : prénom de l'utilisateur éventuellement stocké dans le localStorage
+ * - "lastName" *(string)* : nom de l'utilisateur éventuellement stocké dans le localStorage
+ * - "userName" *(string)* : pseudo de l'utilisateur éventuellement stocké dans le localStorage
+ * - "userEmail" *(string)* : email de l'utilisateur éventuellement stocké dans le localStorage
+ * - "userPassword" *(string)* : mot de passe de l'utilisateur éventuellement stocké dans le localStorage
+ * - "getStatus" *("idle" | "loading" | "succeeded" | "failed")* : état de la requête d'obtention des données utilisateur
+ * - "putStatus" *("idle" | "loading" | "succeeded" | "failed")* : état de la requête d'envoi de données utilisateur
+ *
+ * ### Reducers:
+ * - "resetUser" : réinitialise entièrement le state utilisateur
+ *
+ * ### Extra reducers:
+ * #### Requête GET USER DATA :
+ * - "getUserData.pending" : Définit "getStatus" sur loading
+ * - "getUserData.fulfilled" : Stocke le prénom, le nom de famille, le pseudo de l'utilisateur et définit "getStatus" sur "succeeded"
+ * - "getUserData.rejected" : Définit "getStatus" sur "failed" et stocke le message d'erreur
+ * #### Requête PUT USER DATA :
+ * - "putUserData.pending" : Définit "putStatus" sur loading
+ * - "putUserData.fulfilled" : Stocke le pseudo de l'utilisateur et définit "putStatus" sur "succeeded"
+ * - "putUserData.rejected" : Définit "putStatus" sur "failed" et stocke le message d'erreur
+ *
+ * ### Action exportées:
+ * - {@link resetUser}
+ *
+ * @module userSlice
+ * @see {@link getUserData} pour la gestion de la requête asynchrone de l'obtention des données utilisateur.
+ * @see {@link putUserData} pour la gestion de la requête asynchrone de de mise à jour des données utilisateur.
+ */
 const initialState = {
   firstName: safeGetItem("firstName"),
   lastName: safeGetItem("lastName"),
