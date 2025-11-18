@@ -25,6 +25,7 @@ function AppRouter() {
           <Route path="/" element={<Home />}></Route>
           <Route path="/signIn" element={<SignIn />}></Route>
           <Route path="/user-account" element={<UserAccount />}></Route>
+          <Route path="*" element={<SignIn />}></Route>
         </Routes>
       </BrowserRouter>
     </>
